@@ -3,5 +3,5 @@ FROM node:alpine
     WORKDIR /usr/src
     COPY . /usr/src
 
-EXPOSE 3000
+EXPOSE 80
 ENTRYPOINT [ "./dockerfile_entrypoint.sh"]
