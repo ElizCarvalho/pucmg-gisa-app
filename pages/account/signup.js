@@ -5,20 +5,23 @@ import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import { InputLabel, Select, MenuItem } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useContext } from 'react'; 
+import { AuthContext } from '../../contexts/AuthContext';
+import { useForm } from "react-hook-form";
 
 const theme = createTheme();
 
 export default function Signup() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  const { register, handleSubmit } = useForm();
+  const { signUp } = useContext(AuthContext)
+
+  async function handleSignIn(data){
+    console.log(data)
+    await signUp(data);
   };
 
   return (
@@ -36,10 +39,11 @@ export default function Signup() {
           <Typography component="h1" variant="h5">
             Bem Vindo ao Boa Saúde
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={handleSubmit(handleSignIn)} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
+                 {...register('email')}
                   autoComplete="given-name"
                   name="email"
                   required
@@ -49,8 +53,22 @@ export default function Signup() {
                   autoFocus
                 />
               </Grid>
+              <Grid item xs={12} hidden>
+              <InputLabel id="select-role">Função</InputLabel>
+              <Select
+                {...register('role')}
+                labelId="select-role"
+                id="role"
+                autoWidth
+                defaultValue={0}
+                label="Função"
+              >
+                <MenuItem value={0}>Associado</MenuItem>
+              </Select>
+              </Grid>
               <Grid item xs={12}>
                 <TextField
+                  {...register('password')}
                   required
                   fullWidth
                   name="password"
@@ -62,21 +80,16 @@ export default function Signup() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  {...register('confirmPassword')}
                   required
                   fullWidth
-                  name="confirm-password"
+                  name="confirmPassword"
                   label="Confirme a senha"
                   type="password"
-                  id="confirm-password"
+                  id="confirmPassword"
                   autoComplete="confirm-password"
                 />
               </Grid>
-              {/* <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid> */}
             </Grid>
             <Button
               type="submit"
@@ -88,7 +101,7 @@ export default function Signup() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/account/login" variant="body2">
                   Já tem uma conta ? Faça o seu login
                 </Link>
               </Grid>
