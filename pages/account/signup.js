@@ -5,13 +5,13 @@ import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import { InputLabel, Select, MenuItem, Avatar, Paper, Alert, Collapse, IconButton, CloseIcon, AlertTitle } from '@mui/material';
+import { InputLabel, Select, MenuItem, Avatar, Paper, Alert, Collapse, AlertTitle } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useContext, useState } from 'react'; 
 import { AuthContext } from '../../contexts/AuthContext';
 import { useForm } from "react-hook-form";
-import Error from 'next/error';
+
 
 const theme = createTheme();
 
@@ -21,18 +21,18 @@ export default function Signup() {
   const [isValid, setIsValid] = useState(false);
   const [open, setOpen] = useState(false);
 
-  let messageError;
+  let message;
 
   async function handleSignIn(data){
     
     try{
       await signUp(data);
-      messageError = "Cadastro realizado com sucesso"
+      message = "Cadastro realizado com sucesso"
       setIsValid(true);
       setOpen(true);
 
     }catch(error){
-      messageError = error.data.message;
+      message = error.data.message;
       setIsValid(false);
       setOpen(true);  
     }
@@ -79,7 +79,7 @@ export default function Signup() {
                       }
                     >
                       <AlertTitle>Erro</AlertTitle>
-                          { messageError }
+                          { message }
                     </Alert>
             }
            

@@ -4,72 +4,132 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useContext } from 'react'; 
+import { useContext, useState } from 'react'; 
 import { AuthContext } from '../../contexts/AuthContext';
 import { useForm } from "react-hook-form";
+import { InputLabel, Select, MenuItem, Avatar, Paper, Alert, Collapse, AlertTitle, Grid } from '@mui/material';
 
 const theme = createTheme();
 
 export default function Login() {
   const { register, handleSubmit } = useForm();
-
   const { signIn } = useContext(AuthContext); 
+  const [isValid, setIsValid] = useState(false);
+  const [open, setOpen] = useState(false);
+  let message;
 
   async function handleLogin(data){
-    await signIn(data);
+    try{
+      await signIn(data);
+      message = "Login realizado com sucesso"
+      setIsValid(true);
+      setOpen(true);
+
+    }catch(error){
+      message = error.data.message;
+      setIsValid(false);
+      setOpen(true);  
+    }
+    
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
-        <Box
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
           sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            backgroundImage: 'url(https://source.unsplash.com/tE7_jvK-_YU)',
+            backgroundRepeat: 'no-repeat',
+            backgroundColor: (t) =>
+              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
           }}
-        >
-          <Typography component="h1" variant="h5">
-            Login
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit(handleLogin)} noValidate sx={{ mt: 1 }}>
-            <TextField
-              {...register('email')}
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="E-mail"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              {...register('password')}
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Senha"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
+        />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Collapse in={open}>
+            {isValid
+                  ? <Alert
+                      severity='success'
+                      action={
+                        <Button color="inherit" size="small" onClick={() => {setOpen(false);}}> 
+                          Fechar
+                        </Button>
+                      }
+                    >
+                      <AlertTitle>Deu tudo certo!</AlertTitle>
+                        Login realizado com sucesso
+                    </Alert>
+                  : <Alert
+                      severity='error'
+                      action={
+                        <Button color="inherit" size="small" onClick={() => {setOpen(false);}}> 
+                          Fechar
+                        </Button>
+                      }
+                    >
+                      <AlertTitle>Erro</AlertTitle>
+                          { message }
+                    </Alert>
+            }
+           
+          </Collapse>
+
+          <Box
+            sx={{
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          
+          </Avatar>
+            <Typography component="h1" variant="h5">
               Login
-            </Button>
+            </Typography>
+            <Box component="form" onSubmit={handleSubmit(handleLogin)} noValidate sx={{ mt: 1 }}>
+              <TextField
+                {...register('email')}
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="E-mail"
+                name="email"
+                autoComplete="email"
+                autoFocus
+              />
+              <TextField
+                {...register('password')}
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Senha"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Login
+              </Button>
+            </Box>
           </Box>
-        </Box>
-      </Container>
+        </Grid>
+      </Grid>
     </ThemeProvider>
   );
 }
