@@ -1,13 +1,13 @@
 import axios from "axios";
 
 
-const baseUrl = 'http://192.168.1.193:8000/api'
+const baseUrl = 'http://192.168.10.20:9000/api'
 export async function signInRequest(data){
     let responseData
     try{
         const response = await axios({
             method: 'post',
-            url: `${baseUrl}/account/login`,
+            url: `${baseUrl}/auth/login`,
             data
         });
 
@@ -30,7 +30,7 @@ export async function signUpRequest(data){
     try{
         const response = await axios({
             method: 'post',
-            url: `${baseUrl}/account/register`,
+            url: `${baseUrl}/auth/register`,
             data
         });
 
@@ -43,7 +43,6 @@ export async function signUpRequest(data){
             user
         }
     }catch(error){
-        console.log("Deu problema aqui no register")
         throw error
     }
 }

@@ -62,8 +62,7 @@ export function AuthProvider({children}){
             setUser(user);
             Router.push('/dashboard');
         }catch(error){
-            console.log("Ocorreu um erro ao cadastrar usuario");
-            console.log(error);
+            throw error.response
         }
     }
 
