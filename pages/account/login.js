@@ -17,21 +17,35 @@ export default function Login() {
   const { signIn } = useContext(AuthContext); 
   const [isValid, setIsValid] = useState(false);
   const [open, setOpen] = useState(false);
-  let message;
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
+
+  async function getGeolocation(){
+    
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(function(position){
+        setLat(position.coords.latitude)
+        setLng(position.coords.longitude)
+    });
+    }
+  }
 
   async function handleLogin(data){
     try{
+      
+      getGeolocation();
+
+      data.latitude = String(lat)
+      data.longitude = String(lng)
+
       await signIn(data);
-      message = "Login realizado com sucesso"
       setIsValid(true);
       setOpen(true);
 
     }catch(error){
-      message = error.data.message;
       setIsValid(false);
       setOpen(true);  
     }
-    
   };
 
   return (
@@ -75,7 +89,7 @@ export default function Login() {
                       }
                     >
                       <AlertTitle>Erro</AlertTitle>
-                          { message }
+                          Login incorreto. Confira seus dados e tente novamente.
                     </Alert>
             }
            

@@ -23,11 +23,15 @@ export function AuthProvider({children}){
 //     }, [])
 
 
-    async function signIn({email, password}){
+    async function signIn({email, password, latitude, longitude}){
+
         try{
             const { token, user } = await signInRequest({
                 email, 
-                password
+                password,
+                latitude, 
+                longitude
+
             });
             setCookie(undefined, 'gisa-token', token, {
                 maxAge: 60 * 60 * 1, // 1 hora 
@@ -44,13 +48,16 @@ export function AuthProvider({children}){
         }
     }
 
-    async function signUp({email, role, password, confirmPassword}){
+    async function signUp({email, role, password, confirmPassword, latitude, longitude}){
+
         try{
             const { token, user } = await signUpRequest({
                 email, 
                 role, 
                 password,
-                confirmPassword
+                confirmPassword,
+                latitude,
+                longitude
             }); 
             setCookie(undefined, 'gisa-token', token, {
                 maxAge: 60 * 60 * 1,

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const baseUrl = 'http://192.168.10.20:9000/api'
+const baseUrl = 'http://192.168.10.20:8000/gisa'
 export async function signInRequest(data){
     let responseData
     try{

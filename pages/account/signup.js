@@ -20,19 +20,32 @@ export default function Signup() {
   const { signUp } = useContext(AuthContext)
   const [isValid, setIsValid] = useState(false);
   const [open, setOpen] = useState(false);
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
 
-  let message;
+  async function getGeolocation(){
+    
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(function(position){
+        setLat(position.coords.latitude)
+        setLng(position.coords.longitude)
+    });
+    }
+  }
 
   async function handleSignIn(data){
-    
     try{
+
+      getGeolocation();
+
+      data.latitude = String(lat)
+      data.longitude = String(lng)
+      
       await signUp(data);
-      message = "Cadastro realizado com sucesso"
       setIsValid(true);
       setOpen(true);
 
     }catch(error){
-      message = error.data.message;
       setIsValid(false);
       setOpen(true);  
     }
@@ -79,7 +92,7 @@ export default function Signup() {
                       }
                     >
                       <AlertTitle>Erro</AlertTitle>
-                          { message }
+                          Ocorreu um erro ao cadastrar. Tente novamente.
                     </Alert>
             }
            
