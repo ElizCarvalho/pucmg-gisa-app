@@ -1,13 +1,13 @@
 import axios from "axios";
 
 
-const baseUrl = 'http://192.168.10.20:8000/gisa'
+const baseUrl = 'http://192.168.1.193:8000/gisa'
 export async function signInRequest(data){
     let responseData
     try{
         const response = await axios({
             method: 'post',
-            url: `${baseUrl}/auth/login`,
+            url: `${baseUrl}/auth/account/login`,
             data
         });
 
@@ -30,7 +30,7 @@ export async function signUpRequest(data){
     try{
         const response = await axios({
             method: 'post',
-            url: `${baseUrl}/auth/register`,
+            url: `${baseUrl}/auth/account/register`,
             data
         });
 
@@ -48,6 +48,5 @@ export async function signUpRequest(data){
 }
 
 // export async function getUserInfo(token){
-
 
 // }

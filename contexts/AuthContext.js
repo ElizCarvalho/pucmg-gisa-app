@@ -12,7 +12,6 @@ export function AuthProvider({children}){
     const [user, setUser] = useState(); 
 
     const isAuthenticated = !!user;
-
         
 //    useEffect(() => {
 //         const { 'gisa-token': token } = parseCookies();

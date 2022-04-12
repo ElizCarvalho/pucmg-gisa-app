@@ -103,11 +103,11 @@ export default function Login() {
               alignItems: 'center',
             }}
           >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-          
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }} src="/static/images/logo.jpeg">
+            
           </Avatar>
             <Typography component="h1" variant="h5">
-              Login
+              Bem Vindo(a) ao Boa Saúde
             </Typography>
             <Box component="form" onSubmit={handleSubmit(handleLogin)} noValidate sx={{ mt: 1 }}>
               <TextField

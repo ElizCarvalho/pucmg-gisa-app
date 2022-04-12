@@ -40,7 +40,7 @@ export default function Signup() {
 
       data.latitude = String(lat)
       data.longitude = String(lng)
-      
+
       await signUp(data);
       setIsValid(true);
       setOpen(true);
@@ -111,7 +111,7 @@ export default function Signup() {
               
             </Avatar>
             <Typography component="h1" variant="h5">
-              Bem Vindo ao Boa Saúde
+              Bem Vindo(a) ao Boa Saúde
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit(handleSignIn)} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
