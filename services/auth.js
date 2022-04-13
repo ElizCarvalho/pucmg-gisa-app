@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import jwt_decode from "jwt-decode";
 
 const baseUrl = 'http://192.168.1.193:8000/gisa'
 export async function signInRequest(data){
@@ -47,6 +47,8 @@ export async function signUpRequest(data){
     }
 }
 
-// export async function getUserInfo(token){
-
-// }
+export async function getUserInfo(token){
+    console.log(token)
+    var decoded = jwt_decode(token, { header: true })
+    console.log(decoded);
+}

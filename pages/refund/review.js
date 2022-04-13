@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Box, Container } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import { DashboardLayout } from '../../components/dashboard/dashboard-layout';
 
 const Review = () => (
@@ -18,7 +18,9 @@ const Review = () => (
     >
       <Container maxWidth={false}>
         <Box sx={{ mt: 3 }}>
-            Analisar Reembolso
+          <Typography variant="h3">
+              Analisar Reembolso
+            </Typography>
         </Box>
       </Container>
     </Box>

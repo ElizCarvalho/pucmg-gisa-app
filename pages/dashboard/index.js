@@ -1,8 +1,9 @@
 import Head from 'next/head';
-import { Box, Container, Grid } from '@mui/material';
+import { Box, Container, Grid, Typography } from '@mui/material';
 import { DashboardLayout } from '../../components/dashboard/dashboard-layout';
 import { parseCookies } from 'nookies';
 import { GetServerSideProps } from 'next';
+import PainelSlider from '../../components/dashboard/painel-slider';
 
 const Dashboard = () => (
   <>
@@ -19,7 +20,11 @@ const Dashboard = () => (
       }}
     >
       <Container maxWidth={false}>
-        Meu Painel
+        <Box sx={{ mt: 3 }}>
+          <Typography variant="h3">
+            Meu Painel
+          </Typography>
+        </Box>
         <Grid
           container
           spacing={3}
@@ -31,7 +36,7 @@ const Dashboard = () => (
             xl={3}
             xs={12}
           >
-            {/* Quadrado 1 para página inicial */}
+            <PainelSlider />
           </Grid>
           <Grid
             item

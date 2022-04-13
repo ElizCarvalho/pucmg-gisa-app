@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Box, Container } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import { DashboardLayout } from '../../components/dashboard/dashboard-layout';
 
 const MyRequests = () => (
@@ -17,10 +17,10 @@ const MyRequests = () => (
       }}
     >
       <Container maxWidth={false}>
-        {/* <CustomerListToolbar /> */}
         <Box sx={{ mt: 3 }}>
-            Minhas Solicitações de Reembolso
-          {/* <CustomerListResults customers={customers} /> */}
+            <Typography variant="h3">
+              Minhas Solicitações de Reembolso
+            </Typography>
         </Box>
       </Container>
     </Box>

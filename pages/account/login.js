@@ -3,12 +3,12 @@ import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useContext, useState } from 'react'; 
 import { AuthContext } from '../../contexts/AuthContext';
 import { useForm } from "react-hook-form";
-import { InputLabel, Select, MenuItem, Avatar, Paper, Alert, Collapse, AlertTitle, Grid } from '@mui/material';
+import { Paper, Alert, Collapse, AlertTitle, Grid } from '@mui/material';
+import Image from 'next/image';
 
 const theme = createTheme();
 
@@ -103,12 +103,8 @@ export default function Login() {
               alignItems: 'center',
             }}
           >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }} src="/static/images/logo.jpeg">
-            
-          </Avatar>
-            <Typography component="h1" variant="h5">
-              Bem Vindo(a) ao Boa Saúde
-            </Typography>
+          <Image src="/logo2.svg" width={250} height={250} />
+
             <Box component="form" onSubmit={handleSubmit(handleLogin)} noValidate sx={{ mt: 1 }}>
               <TextField
                 {...register('email')}
@@ -137,6 +133,7 @@ export default function Login() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                
               >
                 Login
               </Button>

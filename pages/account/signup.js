@@ -6,12 +6,11 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { InputLabel, Select, MenuItem, Avatar, Paper, Alert, Collapse, AlertTitle } from '@mui/material';
-import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useContext, useState } from 'react'; 
 import { AuthContext } from '../../contexts/AuthContext';
 import { useForm } from "react-hook-form";
-
+import Image from 'next/image';
 
 const theme = createTheme();
 
@@ -107,12 +106,7 @@ export default function Signup() {
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Bem Vindo(a) ao Boa Saúde
-            </Typography>
+           <Image src="/logo2.svg" width={250} height={250} />
             <Box component="form" noValidate onSubmit={handleSubmit(handleSignIn)} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -126,19 +120,6 @@ export default function Signup() {
                     label="E-mail"
                     autoFocus
                   />
-                </Grid>
-                <Grid item xs={12} hidden>
-                <InputLabel id="select-role">Função</InputLabel>
-                <Select
-                  {...register('role')}
-                  labelId="select-role"
-                  id="role"
-                  autoWidth
-                  defaultValue={0}
-                  label="Função"
-                >
-                  <MenuItem value={0}>Associado</MenuItem>
-                </Select>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -163,6 +144,20 @@ export default function Signup() {
                     id="confirmPassword"
                     autoComplete="confirm-password"
                   />
+                </Grid>
+                <Grid item xs={12} hidden>
+                  <InputLabel id="select-role">Função</InputLabel>
+                  <Select
+                    {...register('role')}
+                    labelId="select-role"
+                    id="role"
+                    autoWidth
+                    defaultValue={0}
+                    label="Função"
+                  >
+                    <MenuItem value={2}>Associado</MenuItem>
+                    <MenuItem value={3}>Prestador</MenuItem>
+                  </Select>
                 </Grid>
               </Grid>
               <Button

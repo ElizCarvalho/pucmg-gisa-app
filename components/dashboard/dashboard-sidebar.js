@@ -13,30 +13,44 @@ const items = [
     {
         href:  '/dashboard',
         icon: (<DashboardIcon fontSize="small" />),
-        title: 'Meu Painel'
+        title: 'Meu Painel',
+        rolePermission: [
+            1,
+            2,
+            3
+        ]
+        
     },
     {
         href: '#',
         icon: (<AttachMoneyIcon fontSize="small"/>),
-        title: 'Reembolso'
+        title: 'Reembolso',
+        rolePermission: [
+            1,
+            2,
+            3
+        ]
     },
     {
         href: '/refund/request',
         icon: (<></>),
         title: 'Solicitar Reembolso',
-        subMenu: true
+        subMenu: true,
+        rolePermission: [2]
     },
     {
         href: '/refund/review',
         icon: (<></>),
         title: 'Analisar Reembolsos',
-        subMenu: true
+        subMenu: true,
+        rolePermission: [3]
     },
     {
         href: '/refund/my-requests',
         icon: (<></>),
         title: 'Minhas Solicitações de Reembolsos',
-        subMenu: true
+        subMenu: true,
+        rolePermission: [2]
     }
 ]
 
@@ -94,6 +108,7 @@ export const DashboardSidebar = (props) => {
                     />
                     <Box sx={{ flexGrow: 1 }}>
                     {items.map((item) => (
+                    (item.rolePermission.includes(user?.role)) &&
                         <NavItem
                         key={item.title}
                         icon={item.icon}

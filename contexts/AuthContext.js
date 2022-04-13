@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { signInRequest, signUpRequest } from "../services/auth";
+import { getUserInfo, signInRequest, signUpRequest } from "../services/auth";
 import { setCookie, parseCookies } from "nookies";
 import Router from "next/router";
 import { api } from "../services/api";
@@ -13,13 +13,13 @@ export function AuthProvider({children}){
 
     const isAuthenticated = !!user;
         
-//    useEffect(() => {
-//         const { 'gisa-token': token } = parseCookies();
+   useEffect(() => {
+        const { 'gisa-token': token } = parseCookies();
 
-//         if(token){
-//             getUserInfo.then((response) => setUser(response.user))
-//         }        
-//     }, [])
+        if(token){
+            getUserInfo(token).then((response) => setUser(response.user))
+        }        
+    }, [])
 
 
     async function signIn({email, password, latitude, longitude}){
