@@ -14,11 +14,11 @@ export function AuthProvider({children}){
     const isAuthenticated = !!user;
         
    useEffect(() => {
-        const { 'gisa-token': token } = parseCookies();
+        // const { 'gisa-token': token } = parseCookies();
 
-        if(token){
-            getUserInfo(token).then((response) => setUser(response.user))
-        }        
+        // if(token){
+        //     getUserInfo(token).then((response) => setUser(response.user))
+        // }        
     }, [])
 
 

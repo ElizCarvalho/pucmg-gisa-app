@@ -3,7 +3,7 @@ import { Box, Container, Grid, Typography } from '@mui/material';
 import { DashboardLayout } from '../../components/dashboard/dashboard-layout';
 import { parseCookies } from 'nookies';
 import { GetServerSideProps } from 'next';
-import PainelSlider from '../../components/dashboard/painel-slider';
+import { Image } from '@mui/icons-material';
 
 const Dashboard = () => (
   <>
@@ -36,7 +36,10 @@ const Dashboard = () => (
             xl={3}
             xs={12}
           >
-            <PainelSlider />
+            <img 
+                src="/painel-1.svg" 
+                width={500} 
+                height={500}/>
           </Grid>
           <Grid
             item
