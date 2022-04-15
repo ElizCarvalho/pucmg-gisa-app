@@ -49,7 +49,7 @@ const items = [
     {
         href: '/refund/my-requests',
         icon: (<></>),
-        title: 'Minhas Solicitações de Reembolsos',
+        title: 'Minhas Solicitações de Reembolso',
         subMenu: true,
         rolePermission: [2]
     }

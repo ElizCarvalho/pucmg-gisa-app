@@ -24,3 +24,21 @@ export async function createRefund(data){
         throw error
     }
 }
+
+export async function getRefunds(){
+    let responseData;
+
+    try{
+        const response = await axios({
+            method: 'GET',
+            url: `${baseURL}/refund`,
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+        })
+        responseData = response.data
+        return responseData;
+    }catch(error){
+        throw error
+    }
+}
