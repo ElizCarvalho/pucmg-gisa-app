@@ -1,5 +1,6 @@
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { Box, Divider, Drawer, Typography, useMediaQuery } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
@@ -110,6 +111,16 @@ export const DashboardSidebar = (props) => {
                         title={item.title}
                         sx={item.subMenu ? { px: 3, py: 0 } : {px: 2}}/>
                     ))}
+                    </Box>
+
+                    <Box sx={{ flexGrow: 1}}>
+                        <NavItem 
+                            key="Sair da Conta"
+                            icon={<LogoutIcon fontSize="small" />}
+                            href="/account/logout"
+                            title="Sair da Conta"
+                            sx={{ px: 2}}
+                        />
                     </Box>
             </Box>
         </>

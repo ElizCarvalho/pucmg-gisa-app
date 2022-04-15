@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { getUserInfo, signInRequest, signUpRequest } from "../services/auth";
-import { setCookie, parseCookies } from "nookies";
+import { setCookie, parseCookies, destroyCookie } from "nookies";
 import Router from "next/router";
 import { api } from "../services/api";
 
@@ -71,8 +71,18 @@ export function AuthProvider({children}){
         }
     }
 
+    async function signOut(){
+        try{
+            destroyCookie(undefined, 'gisa-token');
+            Router.push('/')
+        }catch(error){
+            throw error.response
+        }
+
+    }
+
     return (
-        <AuthContext.Provider value={{ user, isAuthenticated, signIn, signUp }}>
+        <AuthContext.Provider value={{ user, isAuthenticated, signIn, signUp, signOut }}>
             { children }
         </AuthContext.Provider>
     ) 

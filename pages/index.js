@@ -1,6 +1,3 @@
-import { GetServerSideProps } from 'next';
-import { parseCookies } from 'nookies';
-
 export default function Home() {
       return (<></>)
 }
