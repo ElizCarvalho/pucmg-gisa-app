@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Box, Container, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { Box, Container, Grid, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, Typography } from '@mui/material';
 import { DashboardLayout } from '../../components/dashboard/dashboard-layout';
 import { useEffect, useState } from 'react';
 import { getRefunds } from '../../services/refund';
@@ -79,7 +79,13 @@ export default function Review() {
                       <TableCell align="center">R$ {myRequest.price}</TableCell>
                       <TableCell align="center">{<StatusRefund statusRefund={myRequest.status}></StatusRefund>}</TableCell>
                       <TableCell align="center">
-                        <EditIcon fontSize="small" onClick={openModal()}/>
+                        <IconButton 
+                            onClick={openModal()}
+                        >
+                          <Tooltip title="Editar">
+                            <EditIcon fontSize="small" />
+                          </Tooltip>
+                        </IconButton>
                       </TableCell>
                     </TableRow>
                   ))}
