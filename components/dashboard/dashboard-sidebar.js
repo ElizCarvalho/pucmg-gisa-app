@@ -89,23 +89,17 @@ export const DashboardSidebar = (props) => {
                 }}
             >
                 <div>
-                    <Box sx={{ width: 150, height: 150, p: 2, mx: 7}} >
+                    <Box sx={{ width: 350, height: 150, p: 0, mx: 2}} >
                         <NextLink
                             href="/dashboard"
                             passHref
                         >
                             <a>
-                               <Image src="/logo.svg" width={250} height={250} />
+                               <Image src="/logo3.svg" width={200} height={100} />
                             </a>
                         </NextLink>
                     </Box>
                 </div>
-                <Divider
-                    sx={{
-                        borderColor: '#2D3748',
-                        my: 3
-                    }}
-                    />
                     <Box sx={{ flexGrow: 1 }}>
                     {items.map((item) => (
                     (item.rolePermission.includes(user?.role)) &&
@@ -117,7 +111,6 @@ export const DashboardSidebar = (props) => {
                         sx={item.subMenu ? { px: 3, py: 0 } : {px: 2}}/>
                     ))}
                     </Box>
-                <Divider sx={{ borderColor: '#2D3748' }} />
             </Box>
         </>
     );

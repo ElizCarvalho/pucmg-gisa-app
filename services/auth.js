@@ -20,7 +20,6 @@ export async function signInRequest(data){
         user
     }
     }catch(error){
-        console.log("Deu problema aqui")
         throw error
     }
 }
@@ -48,7 +47,23 @@ export async function signUpRequest(data){
 }
 
 export async function getUserInfo(token){
-    console.log(token)
-    var decoded = jwt_decode(token, { header: true })
-    console.log(decoded);
+    let responseData
+    try{
+        const response = await axios({
+            method: 'get',
+            url: `${baseUrl}/auth/account/userinfo`,
+            headers: {"access_token" : token}
+        });
+
+     responseData = await response.data;
+
+     console.log(responseData);
+     const {user} = responseData;
+
+     return {
+        user
+    }
+    }catch(error){
+        throw error
+    }
 }

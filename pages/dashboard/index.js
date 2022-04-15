@@ -1,9 +1,9 @@
 import Head from 'next/head';
-import { Box, Container, Grid, Typography } from '@mui/material';
+import { Box, Container, Grid, Paper, Typography } from '@mui/material';
 import { DashboardLayout } from '../../components/dashboard/dashboard-layout';
 import { parseCookies } from 'nookies';
 import { GetServerSideProps } from 'next';
-import { Image } from '@mui/icons-material';
+import DashboardMenu from '../../components/dashboard/deshboard-menu';
 
 const Dashboard = () => (
   <>
@@ -16,40 +16,58 @@ const Dashboard = () => (
       component="main"
       sx={{
         flexGrow: 1,
-        py: 8
+        py: 4
       }}
     >
+
       <Container maxWidth={false}>
-        <Box sx={{ mt: 3 }}>
-          <Typography variant="h3">
+      <Box sx={{ mb: 8,}}>
+          <Typography variant="h5">
             Meu Painel
           </Typography>
         </Box>
-        <Grid
+
+     
+         <Paper
+            sx={{
+              position: 'relative',
+              color: '#fff',
+              mb: 4,
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              backgroundImage: `url('painel.jpg')`,
+              height: 350
+            }}
+      >
+      <Grid container sx={{ flexDirection: 'column '}}>
+        <Grid item md={12}>
+          <Box
+            sx={{
+              position: 'relative',
+              p: { xs: 3, md: 1 },
+              mt: 15,
+              pr: { md: 0 },
+            }}
+          >
+            <Typography component="h1" variant="h3" color="inherit" textAlign="center" gutterBottom >
+              Alterações da Rede Credenciada 
+            </Typography>
+            <Typography variant="h5" color="inherit" textAlign="center" paragraph>
+              <a href="#">Clique Aqui</a> e confira!
+            </Typography>
+      
+          </Box>
+        </Grid>
+      </Grid>
+          
+          {<img style={{ display: 'none'}} src="/painel.jpg" />} 
+         </Paper> 
+         <Grid
           container
           spacing={3}
         >
-          <Grid
-            item
-            lg={3}
-            sm={6}
-            xl={3}
-            xs={12}
-          >
-            <img 
-                src="/painel-1.svg" 
-                width={500} 
-                height={500}/>
-          </Grid>
-          <Grid
-            item
-            lg={3}
-            sm={6}
-            xl={3}
-            xs={12}
-          >
-            {/* Quadrado 2 para a página inicial */}
-          </Grid>
+             <DashboardMenu />
         </Grid>
       </Container>
     </Box>

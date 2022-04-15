@@ -14,11 +14,11 @@ export function AuthProvider({children}){
     const isAuthenticated = !!user;
         
    useEffect(() => {
-        // const { 'gisa-token': token } = parseCookies();
+        const { 'gisa-token': token } = parseCookies();
 
-        // if(token){
-        //     getUserInfo(token).then((response) => setUser(response.user))
-        // }        
+        if(token){
+            getUserInfo(token).then((response) => setUser(response.user))
+        }        
     }, [])
 
 
@@ -42,7 +42,6 @@ export function AuthProvider({children}){
             setUser(user);
             Router.push("/dashboard");
         }catch(error){
-            console.log("Login incorreto. Tem certeza que colocou seus dados corretamente?");
             console.log(error);
         }
     }
