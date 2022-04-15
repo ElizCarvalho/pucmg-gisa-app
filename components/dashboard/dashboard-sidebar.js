@@ -1,7 +1,7 @@
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Box, Divider, Drawer, Typography, useMediaQuery } from '@mui/material';
+import { Box, Drawer, useMediaQuery } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
 import NextLink from 'next/link';

@@ -2,7 +2,6 @@ import { createContext, useState, useEffect } from "react";
 import { getUserInfo, signInRequest, signUpRequest } from "../services/auth";
 import { setCookie, parseCookies, destroyCookie } from "nookies";
 import Router from "next/router";
-import { api } from "../services/api";
 
 
 export const AuthContext = createContext({})
@@ -36,13 +35,11 @@ export function AuthProvider({children}){
                 maxAge: 60 * 60 * 1, // 1 hora 
                 path: '/'
             });
-
-            api.defaults.headers['acces-token'] = token;
             
             setUser(user);
             Router.push("/dashboard");
         }catch(error){
-            console.log(error);
+            throw error;
         }
     }
 
@@ -62,8 +59,6 @@ export function AuthProvider({children}){
                 path: '/'
             });
             
-            api.defaults.headers['acces-token'] = token;
-
             setUser(user);
             Router.push('/dashboard');
         }catch(error){
