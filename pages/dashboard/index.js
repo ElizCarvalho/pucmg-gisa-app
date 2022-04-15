@@ -3,7 +3,7 @@ import { Box, Container, Grid, Paper, Typography } from '@mui/material';
 import { DashboardLayout } from '../../components/dashboard/dashboard-layout';
 import { parseCookies } from 'nookies';
 import { GetServerSideProps } from 'next';
-import DashboardMenu from '../../components/dashboard/deshboard-menu';
+import DashboardMenu from '../../components/dashboard/dashboard-menu';
 
 const Dashboard = () => (
   <>

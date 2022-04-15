@@ -11,6 +11,7 @@ import { useContext, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import { useForm } from "react-hook-form";
 import Image from 'next/image';
+import { parseCookies } from 'nookies';
 
 const theme = createTheme();
 
@@ -181,4 +182,20 @@ export default function Signup() {
       </Grid>
     </ThemeProvider>
   );
+}
+export const getServerSideProps = async(ctx) => {
+  const { ['gisa-token']: token } = parseCookies(ctx);
+
+  if(token){
+      return {
+          redirect: {
+              destination: '/dashboard',
+              permanent: false
+          }
+      }
+  }
+
+  return {
+      props:{}
+  }
 }

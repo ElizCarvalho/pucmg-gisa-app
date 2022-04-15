@@ -9,6 +9,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { useForm } from "react-hook-form";
 import { Paper, Alert, Collapse, AlertTitle, Grid } from '@mui/material';
 import Image from 'next/image';
+import { parseCookies } from 'nookies';
 
 const theme = createTheme();
 
@@ -142,4 +143,22 @@ export default function Login() {
       </Grid>
     </ThemeProvider>
   );
+}
+
+
+export const getServerSideProps = async(ctx) => {
+  const { ['gisa-token']: token } = parseCookies(ctx);
+
+  if(token){
+      return {
+          redirect: {
+              destination: '/dashboard',
+              permanent: false
+          }
+      }
+  }
+
+  return {
+      props:{}
+  }
 }

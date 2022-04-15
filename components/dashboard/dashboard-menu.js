@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardActions, CardContent, Grid, Paper, Typography, CardMedia } from "@mui/material";
+import {Card, Grid, CardMedia } from "@mui/material";
 import Image from "next/image";
 
 
