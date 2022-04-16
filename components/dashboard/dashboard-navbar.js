@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types';
 import styled from '@emotion/styled';
-import { AppBar, Avatar, Box, IconButton, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -91,15 +91,6 @@ export const DashboardNavbar = (props) => {
                             </div>
                         </Box>                
                     </Box>
-                {/* <Avatar
-                    sx={{
-                        height: 40, 
-                        width: 40,
-                        ml: 1
-                    }}
-                    src=""
-                >
-                </Avatar> */}
             </Toolbar>
             </DashboardNavbarRoot>
         </>

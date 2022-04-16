@@ -8,6 +8,9 @@ import { useState } from 'react';
 import { createRefund } from '../../services/refund';
 import CpnjInput from '../../components/cpnj/cnpj-input';
 import { useRouter } from 'next/router';
+import { parseCookies } from 'nookies';
+import TypeRefundEnum from '../../enums/typeRefundEnum';
+import TypeNameRefundEnum from '../../enums/typeNameRefundEnum';
 
 export default function Request () {
 
@@ -27,7 +30,8 @@ export default function Request () {
       await createRefund(data);
       setIsValid(true);
       setOpen(true);
-
+      await new Promise((resolve) => setTimeout(() => { resolve('result') },2000));
+      router.push('/refund/my-requests')
     }catch(error){
       setIsValid(false);
       setOpen(true);  
@@ -115,9 +119,9 @@ export default function Request () {
                       required
                       fullWidth
                     >
-                      <MenuItem value={1}>Consulta</MenuItem>
-                      <MenuItem value={2}>Exame/Procedimento/Terapia</MenuItem>
-                      <MenuItem value={3}>Internação</MenuItem>
+                      <MenuItem value={TypeRefundEnum.CONSULTA}>{TypeNameRefundEnum.CONSULTA}</MenuItem>
+                      <MenuItem value={TypeRefundEnum.EXAME_PROCEDIMENTO_TERAPIA}>{TypeNameRefundEnum.EXAME_PROCEDIMENTO_TERAPIA}</MenuItem>
+                      <MenuItem value={TypeRefundEnum.INTERNACAO}>{TypeNameRefundEnum.INTERNACAO}</MenuItem>
                     </Select>
                 </Grid>
                 <Grid
@@ -283,3 +287,19 @@ Request.getLayout = (page) => (
   </DashboardLayout>
 );
 
+export const getServerSideProps = async(ctx) => {
+  const { ['gisa-token']: token } = parseCookies(ctx);
+
+  if(!token){
+      return {
+          redirect: {
+              destination: '/account/login',
+              permanent: false
+          }
+      }
+  }
+
+  return {
+      props:{}
+  }
+}

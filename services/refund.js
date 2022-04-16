@@ -42,3 +42,41 @@ export async function getRefunds(){
         throw error
     }
 }
+
+export async function getRefundById(refundId){
+    let responseData;
+
+    try{
+        const response = await axios({
+            method: 'GET',
+            url: `${baseURL}/refund/${refundId}`,
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+        })
+        responseData = response.data
+        return responseData;
+    }catch(error){
+        throw error
+    }
+}
+
+export async function updateRefundById(refundId, data){
+    let responseData;
+
+    data.id = refundId;
+    try{
+        const response = await axios({
+            method: 'PUT',
+            url: `${baseURL}/refund/${refundId}`,
+            headers: {
+                Authorization: `Bearer ${token}`    
+            },
+            data
+        });
+
+        responseData = await response.data;
+        }catch(error){
+            throw error
+        }
+}

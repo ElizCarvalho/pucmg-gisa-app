@@ -1,11 +1,12 @@
 import Head from 'next/head';
-import { Box, Container, Grid, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, Typography } from '@mui/material';
+import { Box, Container, Grid, IconButton, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, Typography } from '@mui/material';
 import { DashboardLayout } from '../../components/dashboard/dashboard-layout';
 import { useEffect, useState } from 'react';
 import { getRefunds } from '../../services/refund';
 import moment from 'moment';
 import StatusRefund from './status-refund';
 import EditIcon from '@mui/icons-material/Edit';
+import { parseCookies } from 'nookies';
 import NextLink from 'next/link';
 
 
@@ -15,17 +16,12 @@ export default function Review() {
   useEffect( async () => {
     try{
       const requests = await getRefunds();
-      console.log(requests)
       setMyRequests(requests);
     }catch(error){
       throw error
     }
   }, [])
-
-  function openModal(){
-    console.log('Modal')
-  }
-
+    
   return(
     <>
       <Head>
@@ -64,6 +60,7 @@ export default function Review() {
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
+                    <TableCell align="center">Solicitante</TableCell>
                     <TableCell align="center">Data</TableCell>
                     <TableCell align="center">Descrição</TableCell>
                     <TableCell align="center">Valor</TableCell>
@@ -74,18 +71,21 @@ export default function Review() {
                 <TableBody>
                   {myRequests?.map((myRequest) => (
                     <TableRow>
+                      <TableCell align="center">{myRequest.userName}</TableCell>
                       <TableCell align="center">{moment(myRequest.date).format('DD/MM/yyyy')}</TableCell>
                       <TableCell align="center">{myRequest.description}</TableCell>
                       <TableCell align="center">R$ {myRequest.price}</TableCell>
                       <TableCell align="center">{<StatusRefund statusRefund={myRequest.status}></StatusRefund>}</TableCell>
                       <TableCell align="center">
-                        <IconButton 
-                            onClick={openModal()}
+                        <NextLink
+                          href={`/refund/edit/${myRequest.id}`}
                         >
-                          <Tooltip title="Editar">
-                            <EditIcon fontSize="small" />
-                          </Tooltip>
-                        </IconButton>
+                          <IconButton>
+                            <Tooltip title="Editar">
+                              <EditIcon fontSize="small" />
+                            </Tooltip>
+                          </IconButton>
+                        </NextLink>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -94,7 +94,6 @@ export default function Review() {
             </TableContainer>
       </Grid>
       </Paper>
-
       </Box>
     </>
   )
@@ -105,3 +104,20 @@ Review.getLayout = (page) => (
     {page}
   </DashboardLayout>
 );
+
+export const getServerSideProps = async(ctx) => {
+  const { ['gisa-token']: token } = parseCookies(ctx);
+
+  if(!token){
+      return {
+          redirect: {
+              destination: '/account/login',
+              permanent: false
+          }
+      }
+  }
+
+  return {
+      props:{}
+  }
+}

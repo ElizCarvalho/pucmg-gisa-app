@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { getRefunds } from '../../services/refund';
 import moment from 'moment';
 import StatusRefund from './status-refund';
+import { parseCookies } from 'nookies';
 
 
 export default function MyRequests(){
@@ -73,7 +74,7 @@ export default function MyRequests(){
                       <TableCell align="center">{myRequest.description}</TableCell>
                       <TableCell align="center">R$ {myRequest.price}</TableCell>
                       <TableCell align="center">{<StatusRefund statusRefund={myRequest.status}></StatusRefund>}</TableCell>
-                      <TableCell align="center">{(myRequest.updatedAt ? moment(myRequest.updatedAt).format('DD/MM/yyyy HH:MM') : '-')}</TableCell>
+                      <TableCell align="center">{(myRequest.updatedAt ? moment(myRequest.updatedAt).format('DD/MM/yyyy HH:mm') : '-')}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -92,3 +93,19 @@ MyRequests.getLayout = (page) => (
   </DashboardLayout>
 );
  
+export const getServerSideProps = async(ctx) => {
+  const { ['gisa-token']: token } = parseCookies(ctx);
+
+  if(!token){
+      return {
+          redirect: {
+              destination: '/account/login',
+              permanent: false
+          }
+      }
+  }
+
+  return {
+      props:{}
+  }
+}
