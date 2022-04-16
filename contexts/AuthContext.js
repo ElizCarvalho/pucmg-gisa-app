@@ -69,7 +69,7 @@ export function AuthProvider({children}){
     async function signOut(){
         try{
             destroyCookie(undefined, 'gisa-token');
-            Router.push('/')
+            Router.push('/account/login')
         }catch(error){
             throw error.response
         }

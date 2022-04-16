@@ -69,7 +69,9 @@ export default function MyRequests(){
                 </TableHead>
                 <TableBody>
                   {myRequests?.map((myRequest) => (
-                    <TableRow>
+                    <TableRow
+                      key={myRequest.id}
+                    >
                       <TableCell align="center">{moment(myRequest.date).format('DD/MM/yyyy')}</TableCell>
                       <TableCell align="center">{myRequest.description}</TableCell>
                       <TableCell align="center">R$ {myRequest.price}</TableCell>

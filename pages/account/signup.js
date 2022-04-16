@@ -12,6 +12,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { useForm } from "react-hook-form";
 import Image from 'next/image';
 import { parseCookies } from 'nookies';
+import Head from 'next/head';
 
 const theme = createTheme();
 
@@ -53,6 +54,11 @@ export default function Signup() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Head>
+        <title>
+          Logout - Boa Saúde
+        </title>
+      </Head>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid

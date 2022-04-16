@@ -70,7 +70,9 @@ export default function Review() {
                 </TableHead>
                 <TableBody>
                   {myRequests?.map((myRequest) => (
-                    <TableRow>
+                    <TableRow
+                      key={myRequest.id}
+                    >
                       <TableCell align="center">{myRequest.userName}</TableCell>
                       <TableCell align="center">{moment(myRequest.date).format('DD/MM/yyyy')}</TableCell>
                       <TableCell align="center">{myRequest.description}</TableCell>
@@ -107,7 +109,6 @@ Review.getLayout = (page) => (
 
 export const getServerSideProps = async(ctx) => {
   const { ['gisa-token']: token } = parseCookies(ctx);
-
   if(!token){
       return {
           redirect: {

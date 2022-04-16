@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useContext } from "react"
 import { AuthContext } from "../../contexts/AuthContext"
 
@@ -13,7 +14,13 @@ export default function Logout(){
 
     logout();
 
-    return null;
+    return (
+        <Head>
+        <title>
+          Logout - Boa Saúde
+        </title>
+      </Head>
+    );
 }
 
 

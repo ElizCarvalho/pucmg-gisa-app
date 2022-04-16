@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { Paper, Alert, Collapse, AlertTitle, Grid } from '@mui/material';
 import Image from 'next/image';
 import { parseCookies } from 'nookies';
+import Head from 'next/head';
 
 const theme = createTheme();
 
@@ -51,6 +52,11 @@ export default function Login() {
 
   return (
     <ThemeProvider theme={theme}>
+       <Head>
+        <title>
+          Login - Boa Saúde
+        </title>
+      </Head>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
